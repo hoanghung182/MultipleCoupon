@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Checkout\Block\Cart\Coupon"
+                type="HungHoang\MultiPaymentCoupon\Block\Cart\Coupon" />
+    <preference for="Magento\Checkout\Controller\Cart\CouponPost"
+                type="HungHoang\MultiPaymentCoupon\Controller\Cart\CouponPost" />
+</config>

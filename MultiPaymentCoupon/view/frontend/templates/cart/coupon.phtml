@@ -1,0 +1,68 @@
+<?php
+/** @var \HungHoang\MultiPaymentCoupon\Block\Cart\Coupon $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php $coupons = $block->getCouponCodes();?>
+<div class="block discount" id="block-discount">
+    <div class="title" data-role="title">
+        <strong id="block-discount-heading" role="heading" aria-level="2">
+            <?= $escaper->escapeHtml(__('Apply Discount Code'))  ?>
+        </strong>
+    </div>
+    <div class="content" data-role="content" aria-labelledby="block-discount-heading">
+        <form id="discount-coupon-form"
+              class="discount-coupon-form"
+              action="<?= $escaper->escapeUrl($block->getUrl('checkout/cart/couponPost')) ?>"
+              method="post">
+            <div class="fieldset coupon<?= !empty($coupons) ? ' applied' : '' ?>">
+                <input type="hidden" name="remove" id="remove-coupon" value="0"/>
+                <div class="field">
+                    <label for="coupon_code" class="label"><span><?= $escaper->escapeHtml(__('Enter discount code')) ?></span></label>
+                    <div class="control">
+                        <input type="text"
+                               class="input-text"
+                               id="coupon_code"
+                               name="coupon_code"
+                               value=""
+                               placeholder="<?= $escaper->escapeHtmlAttr(__('Enter discount code')) ?>"
+                        />
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button class="action apply secondary" type="button" value="<?= $escaper->escapeHtml(__('Apply Discount'))?>">
+                            <span><?= $escaper->escapeHtml(__('Apply Discount'))?></span>
+                        </button>
+                    </div>
+                </div>
+                <?php if (!empty($coupons)): ?>
+                    <input type="hidden" name="removeCouponValue" id="remove-coupon-value" value=""/>
+                    <div>
+                        <?php foreach ($coupons as $value): ?>
+                            <p class="coupon-code">
+                                <?= $escaper->escapeHtml($value) ?>
+                                <span data-value="<?= $escaper->escapeHtml($value) ?>" class="action cancel">
+                                    <?= $escaper->escapeHtml(__('Cancel Coupon')) ?>
+                                </span>
+                            </p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#block-discount": {
+            "collapsible": {
+                "openedState": "active",
+                "saveState": false
+            }
+        },
+        "#discount-coupon-form": {
+            "MultiPaymentCoupons":{}
+        }
+    }
+</script>

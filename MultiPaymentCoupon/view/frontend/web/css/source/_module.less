@@ -1,0 +1,24 @@
+& when (@media-common = true) {
+    .discount-coupon-form {
+        .cancel {
+            cursor: pointer;
+            background: @button__background;
+            color: @button__color;
+            padding: 2px 5px;
+            margin-left: 10px;
+            font-size: @submenu__font-size;
+            &:before {
+                font-family: @icons__font-name;
+                content: @icon-remove;
+                font-size: 12px;
+            }
+            &:hover,
+            &:active {
+                background: @button__hover__background;
+            }
+        }
+        .coupon-code {
+            margin-top: 10px;
+        }
+    }
+}
